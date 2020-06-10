@@ -23,9 +23,6 @@ class Lander:
     y_speed = 0
     actions = []
 
-    # Applies changes to the mars lander.
-    # Rules based on max values and max changes get applied, so invalid values get clamped.
-    # Also updates the fuel based on the new power.
     def get_changes(self, new_rotation, new_power):
         if new_rotation > self.rotation + max_rotation_change:
             print("New rotation {0} over max rotation change. Clamping.".format(new_rotation))
@@ -51,8 +48,16 @@ class Lander:
             if new_power < min_power:
                 print("New power {0} under overall min value. Clamping".format(new_power))
                 new_power = min_power
+        # Adjust to account for fuel
+        new_fuel = self.fuel - new_power * fuel_cost
+        while new_fuel < 0 and new_power > 0:
+            new_power -= 1
+            new_fuel = self.fuel - new_power * fuel_cost
         return [new_rotation, new_power]
 
+    # Applies changes to the mars lander.
+    # Rules based on max values and max changes get applied, so invalid values get clamped.
+    # Also updates the fuel based on the new power.
     def apply_changes(self, new_rotation, new_power):
         self.rotation = new_rotation
         self.power = new_power

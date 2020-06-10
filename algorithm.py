@@ -6,14 +6,14 @@ from laws import get_distance
 
 population = []
 
-population_count = 50
+population_count = 40
 graded_retention_value = 0.2
-ungraded_retention_value = 0.2
-mutation_rate = 0.05
-weight_location = 20
+ungraded_retention_value = 0.1
+mutation_rate = 0.1
+weight_location = 25
 weight_rotation = 0
-weight_speed_x = 10
-weight_speed_y = 30
+weight_speed_x = 100
+weight_speed_y = 100
 
 winning_score = 100_000_000_000
 

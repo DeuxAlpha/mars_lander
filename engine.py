@@ -1,24 +1,34 @@
 from lander import Lander, LanderState
-from maps import get_maps
+from params import get_maps, get_initial_state
 import matplotlib.pyplot as plt
 import numpy as np
 import math
 import algorithm
 import time
 
+initial_params = get_initial_state()[2]
+game_map = get_maps()[2]
+
 max_height = 3000
 max_width = 7000
+start_x = initial_params[0]
+start_y = initial_params[1]
+start_speed_x = initial_params[2]
+start_speed_y = initial_params[3]
+start_fuel = initial_params[4]
+start_rotation = initial_params[5]
+start_power = initial_params[6]
 ground = [[], []]
 
-game_map = get_maps()[0]
 
-
-def init(lander: Lander, x, y, power, rotation, fuel, initialize_actions):
+def init(lander: Lander, x, y, power, rotation, fuel, x_speed, y_speed, initialize_actions):
     lander.x = x
     lander.y = y
     lander.power = power
     lander.rotation = rotation
     lander.fuel = fuel
+    lander.x_speed = x_speed
+    lander.y_speed = y_speed
     if initialize_actions:
         lander.actions = [[rotation, power, x, y]]
 
@@ -119,10 +129,10 @@ while landed is False:
     for pop in range(algorithm.population_count):
         if len(algorithm.population) - 1 > pop:
             lander = algorithm.population[pop]
-            init(lander, 2500, 2700, 0, 0, 5501, False)
+            init(lander, start_x, start_y, start_power, start_rotation, start_fuel, start_speed_x, start_speed_y, False)
         else:
             lander = Lander()
-            init(lander, 2500, 2700, 0, 0, 5501, True)
+            init(lander, start_x, start_y, start_power, start_rotation, start_fuel, start_speed_x, start_speed_y, True)
         lander.print_stats()
         turn = 0
         lander_state = get_state(lander.x, lander.y, lander.x_speed, lander.y_speed, lander.rotation)
