@@ -26,8 +26,6 @@ class Lander:
     # Rules based on max values and max changes get applied, so invalid values get clamped.
     # Also updates the fuel based on the new power.
     def apply_changes(self, new_rotation, new_power):
-        # For some reason positive rotation goes left and negative goes right.
-        new_rotation = -new_rotation
         if new_rotation > self.rotation + self.max_rotation_change:
             print("New rotation {0} over max rotation change. Clamping.".format(new_rotation))
             new_rotation = self.rotation + self.max_rotation_change

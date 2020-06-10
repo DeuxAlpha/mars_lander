@@ -4,7 +4,7 @@ import math
 from lander import Lander, LanderState
 from laws import get_distance
 
-population_count = 250
+population_count = 20
 population = []
 
 graded_retention_value = 0.3
@@ -12,7 +12,7 @@ ungraded_retention_value = 0.2
 
 
 def get_random_action(lander: Lander):
-    current_rotation = -lander.rotation
+    current_rotation = lander.rotation
     current_power = lander.power
     random_rotation = random.randrange(current_rotation - lander.max_rotation_change,
                                        current_rotation + lander.max_rotation_change + 1)

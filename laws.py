@@ -10,7 +10,7 @@ mars_gravity = -3.711
 # The result will be returned as fractions of 1 in an array,
 # with the first index meaning vertical, the second meaning horizontal
 def get_rotation_power_fraction(rotation):
-    radians = math.radians(rotation)
+    radians = math.radians(-rotation)  # For some reason the sign is reversed.
     x_fraction = math.sin(radians)
     y_fraction = math.cos(radians)
     if 0.00001 > x_fraction > -0.00001:
