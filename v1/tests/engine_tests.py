@@ -1,5 +1,5 @@
 import unittest
-from engine import get_rotation_power_fraction
+from v1.engine import get_rotation_power_fraction
 
 
 class EngineTests(unittest.TestCase):

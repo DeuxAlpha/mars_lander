@@ -1,5 +1,5 @@
 from enum import Enum
-from laws import mars_gravity, get_rotation_power_fraction
+from v1.laws import mars_gravity, get_rotation_power_fraction
 import random
 
 max_rotation = 90

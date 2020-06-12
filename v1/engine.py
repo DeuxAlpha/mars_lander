@@ -1,9 +1,9 @@
-from lander import Lander, LanderState
-from params import get_maps, get_initial_state
+from v1.lander import Lander, LanderState
+from v1.params import get_maps, get_initial_state
 import matplotlib.pyplot as plt
 import numpy as np
 import math
-import algorithm
+from v1 import algorithm
 import time
 
 initial_params = get_initial_state()[2]

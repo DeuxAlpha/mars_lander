@@ -1,8 +1,8 @@
 import random
 import math
-from lander import Lander, LanderState, max_rotation_change, max_power_change, max_power, min_power, max_rotation, \
+from v1.lander import Lander, LanderState, max_rotation_change, max_power_change, max_power, min_power, max_rotation, \
     min_rotation, max_x_speed, max_y_speed
-from laws import get_distance
+from v1.laws import get_distance
 
 population = []
 
