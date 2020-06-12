@@ -173,7 +173,8 @@ while landed is False:
             print("We fucking landed dis shit")
             landed = True
         add_lander_to_map(lander.actions)
-        lander_score = algorithm.get_score(lander, landing_zones, lander_state)
+        # lander_score = algorithm.get_score(lander, landing_zones, lander_state)
+        lander_score = algorithm.get_score_v2(lander, is_flat_ground(lander.x), landing_zones, lander_state)
         lander_scores.append([lander_score, lander])
 
     # TODO: Give scores for good coasting, e.g. Keeping overall vertical and horizontal speed within desired parameters.

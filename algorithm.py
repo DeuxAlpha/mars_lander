@@ -6,14 +6,14 @@ from laws import get_distance
 
 population = []
 
-population_count = 40
+population_count = 100
 graded_retention_value = 0.2
 ungraded_retention_value = 0.1
-mutation_rate = 0.1
+mutation_rate = 0.15
 weight_location = 25
 weight_rotation = 0
-weight_speed_x = 100
-weight_speed_y = 100
+weight_speed_x = 12.5
+weight_speed_y = 30
 
 winning_score = 100_000_000_000
 
@@ -35,6 +35,58 @@ def get_random_action(current_rotation, current_power):
         random_rotation,
         random_power
     ]
+
+
+def get_score_v2(lander: Lander, is_in_landing_zone, landing_zones, lander_state: LanderState):
+    if lander_state is LanderState.LANDED:
+        # This should do for max score.
+        return winning_score
+    score = 0
+    x_coord = round(lander.x)
+    y_coord = round(lander.y)
+    speed_x = math.fabs(lander.x_speed)
+    speed_y = math.fabs(lander.y_speed)
+    initial_x = lander.actions[0][2]
+    initial_y = lander.actions[0][3]
+    rotation = math.fabs(lander.rotation)
+    if not is_in_landing_zone:
+        location_score = 0
+        for zone in landing_zones:
+            start_x = zone[0][0]
+            end_x = zone[-1][0]
+            middle_x = (start_x + end_x) / 2  # Center of landing zone, the closer, the better.
+            ground_y = zone[0][1]
+            distance_to_landing_zone = get_distance(x_coord, middle_x, y_coord, ground_y)
+            distance_to_starting_point = get_distance(initial_x, middle_x, initial_y, ground_y)
+            # Normalization in comparison to where we started.
+            # We want to be between 1 and 0, with 1 being the best possible.
+            if distance_to_landing_zone <= 0:
+                location_score_comparison = 1
+                if location_score_comparison > location_score:
+                    location_score = location_score_comparison
+                break
+            achieved_distance_ratio = distance_to_landing_zone / distance_to_starting_point
+            if achieved_distance_ratio > 1:
+                location_score_comparison = 0
+                if location_score_comparison > location_score:
+                    location_score = location_score_comparison
+                break
+            location_score_comparison = 1 - achieved_distance_ratio
+            if location_score_comparison > location_score:
+                location_score = location_score_comparison
+        return location_score
+    # We're already doing pretty good if we're in the landing zone.
+    score += 100_000
+    if speed_x == 0:
+        x_speed_score = 1
+    else:
+        x_speed_score = 1 - (speed_x / (max_x_speed / 4))
+    if speed_y == 0:
+        y_speed_score = 1
+    else:
+        y_speed_score = 1 - (speed_y / (max_y_speed / 4))
+    score += x_speed_score + y_speed_score
+    return score
 
 
 def get_score(lander: Lander, landing_zones, lander_state: LanderState):
