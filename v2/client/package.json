@@ -1,0 +1,12 @@
+{
+  "name": "lander-client",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "electron main.ts"
+  },
+  "author": "Aaron Passchier",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "9.0.4"
+  }
+}
