@@ -6,10 +6,10 @@ from v1.laws import get_distance
 
 population = []
 
-population_count = 100
+population_count = 40
 graded_retention_value = 0.2
 ungraded_retention_value = 0.1
-mutation_rate = 0.15
+mutation_rate = 0.05
 weight_location = 25
 weight_rotation = 0
 weight_speed_x = 12.5

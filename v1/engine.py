@@ -6,8 +6,8 @@ import math
 from v1 import algorithm
 import time
 
-initial_params = get_initial_state()[2]
-game_map = get_maps()[2]
+initial_params = get_initial_state()[1]
+game_map = get_maps()[1]
 
 max_height = 3000
 max_width = 7000

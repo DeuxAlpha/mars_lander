@@ -1,29 +1,30 @@
-const {app, BrowserWindow} = require('electron');
+import {BrowserWindow} from 'electron';
 
-function createWindow() {
-  let window = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
+export default class Main {
+  static mainWindow: Electron.BrowserWindow;
+  static application: Electron.App;
+  static BrowserWindow;
+
+  private static onWindowAllClosed() {
+    if (process.platform !== 'darwin') {
+      Main.application.quit();
     }
-  })
+  }
 
-  window.loadFile('index.html');
+  private static onClose() {
+    Main.mainWindow = null;
+  }
 
-  window.webContents.openDevTools();
+  private static async onReady() {
+    Main.mainWindow = new Main.BrowserWindow({width: 800, height: 600});
+    await Main.mainWindow.loadURL(`file://${__dirname}/index.html`);
+    Main.mainWindow.on('closed', Main.onClose);
+  }
+
+  static main(app: Electron.App, browserWindow: typeof BrowserWindow) {
+    Main.BrowserWindow = browserWindow;
+    Main.application = app;
+    Main.application.on('window-all-closed', Main.onWindowAllClosed);
+    Main.application.on('ready', Main.onReady);
+  }
 }
-
-app.whenReady().then(createWindow);
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-})
-
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length <= 0) {
-    createWindow();
-  }
-})
