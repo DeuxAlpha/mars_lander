@@ -1,11 +1,13 @@
 <template>
   <div id="home-page">
-    <h1>Greetings</h1>
+    <CMarsLanderMap/>
   </div>
 </template>
 
 <script>
 
+import CMarsLanderMap from "@/components/content/CMarsLanderMap";
 export default {
+  components: {CMarsLanderMap}
 }
 </script>
