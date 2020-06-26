@@ -7,6 +7,8 @@
     "build": "vue-cli-service build",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve --remote-debugging-port=9223",
+    "tailwind:build": "npx tailwind build ./tailwind-base.css -o ./src/styles/tailwind.css .",
+    "tailwind:purge": "cross-env NODE_ENV=production npx tailwind build ./tailwind-base.css -o ./src/styles/tailwind.css .",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
@@ -20,13 +22,16 @@
     "vue-router": "3.3.4"
   },
   "devDependencies": {
+    "@tailwindcss/ui": "0.3.0",
     "@types/node": "12.12.47",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-router": "4.4.6",
     "@vue/cli-plugin-typescript": "4.4.6",
     "@vue/cli-service": "4.4.6",
+    "cross-env": "^7.0.2",
     "electron": "9.0.5",
     "node-sass": "4.14.1",
+    "tailwindcss": "1.4.6",
     "sass-loader": "8.0.2",
     "typescript": "3.9.5",
     "vue-cli-plugin-electron-builder": "2.0.0-rc.3",
