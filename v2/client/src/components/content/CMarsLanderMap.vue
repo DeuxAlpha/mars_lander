@@ -1,5 +1,5 @@
 <template>
-  <svg ref="map"/>
+  <div ref="map" id="map-wrapper" class="w-full h-full"/>
 </template>
 
 <script lang="ts">
@@ -8,15 +8,18 @@
 
   @Component
   export default class CMarsLanderMap extends Vue {
-    @Ref('map') readonly map!: SVGSVGElement;
-    readonly controller = new MarsLanderMapController();
+    @Ref('map') readonly svgElement!: SVGSVGElement;
+    controller!: MarsLanderMapController;
 
     mounted() {
-      this.controller.Build(this.map);
+      this.controller = new MarsLanderMapController(this.svgElement);
+      this.controller.GenerateBoundaries(7000, 3000);
     }
   }
 </script>
 
 <style scoped lang="scss">
-
+  #map-wrapper {
+    background: red;
+  }
 </style>
