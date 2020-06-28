@@ -1,29 +1,43 @@
-import * as D3 from 'd3';
+import * as ECharts from 'echarts';
 
 export class MarsLanderMapController {
-  private wrapper!: HTMLElement;
-  private map!: D3.Selection<SVGSVGElement, any, null, undefined>;
-
-  public Init(element: HTMLElement) {
-    this.wrapper = element;
+  constructor() {
   }
 
-  public GenerateBoundaries(x: number, y: number) {
-    console.dir(this.wrapper);
-    this.map = D3.select(this.wrapper)
-      .append('svg')
-      .attr('width', '100%')
-      .attr('height', '100%')
-      .attr('viewBox', '0 0 7000 3000')
+  private chart?: ECharts.ECharts;
 
-    const data = [{x: 0, y: 20}, {x: 150, y: 150}, {x: 300, y: 100}, {x: 450, y: 20}, {x: 600, y: 130}]
+  public InitializeChart(wrapper: HTMLDivElement) {
+    this.chart = ECharts.init(wrapper);
+  }
 
-    this.map.append('path')
-      .datum(data)
-      .attr('d', D3.line<{x: number, y: number}>()
-        .x(d => d.x)
-        .y(d => d.y))
-      .attr('stroke', 'black')
-      .attr('fill', 'none');
+  public LoadData() {
+    const option: ECharts.EChartsResponsiveOption = {
+      baseOption: {
+        title: {
+          text: 'ECharts entry example'
+        },
+        tooltip: {},
+        legend: {
+          data: ['Sales']
+        },
+        xAxis: {
+          data: ["shirt", "cardign", "chiffon shirt", "pants", "heels", "socks"]
+        },
+        yAxis: {},
+        series: [{
+          name: 'Sales',
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20]
+        }]
+      },
+      media: [{
+        query: {},
+        option: {
+          series: [{center: ['50%', '50%']}]
+        }
+      }]
+    };
+
+    this.chart?.setOption(option);
   }
 }
