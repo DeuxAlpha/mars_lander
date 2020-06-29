@@ -1,14 +1,14 @@
 <template>
   <div id="home">
-    <CMarsLanderMap/>
+    <CMarsLander/>
   </div>
 </template>
 
 <script>
-  import CMarsLanderMap from "@/components/content/mars-lander/mars-lander-map/CMarsLanderMap";
+  import CMarsLander from "@/components/content/mars-lander/CMarsLander";
 
   export default {
-    components: {CMarsLanderMap}
+    components: {CMarsLander}
   }
 </script>
 

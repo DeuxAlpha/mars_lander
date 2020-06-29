@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import {Vue, Component, Ref} from 'vue-property-decorator';
-  import {MarsLanderMapController} from "@/components/content/MarsLanderMapController";
+  import {MarsLanderMapController} from "@/components/content/mars-lander/mars-lander-map/MarsLanderMapController";
 
   @Component
   export default class CMarsLanderMap extends Vue {
