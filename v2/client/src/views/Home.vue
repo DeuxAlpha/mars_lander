@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import CMarsLanderMap from "@/components/content/mars-lander-map/CMarsLanderMap";
+  import CMarsLanderMap from "@/components/content/mars-lander/mars-lander-map/CMarsLanderMap";
 
   export default {
     components: {CMarsLanderMap}
